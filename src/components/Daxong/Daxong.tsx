@@ -13,7 +13,7 @@ const Daxong: React.FC<Idaxong> = ({ daxongList }) => {
           <table className="border-collapse border w-full">
             <tr className="text-left">
               <th className="p-2">ID</th>
-              <th className="p-2">Họ Tên</th>
+              <th className="p-2">Tên công việc </th>
               <th className="p-2">Số lượng tuyển </th>
               <th className="p-2">Giới tính </th>
               <th className="p-2">Tuôỉ </th>

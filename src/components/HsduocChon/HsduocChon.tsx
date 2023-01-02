@@ -11,7 +11,7 @@ const HsduocChon: React.FC<Ihsdc> = ({ hsdc }) => {
         <section className="w-full py-6">
           <table className="border-collapse border w-full">
             <tr className="text-left">
-              <th className="p-2">Tên công việc </th>
+              <th className="p-2">Họ Tên </th>
               <th className="p-2">Tên Công việc </th>
               <th className="p-2">Email </th>
               <th className="p-2">CV</th>
