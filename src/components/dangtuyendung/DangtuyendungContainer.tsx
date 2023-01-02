@@ -38,15 +38,7 @@ const DangtuyedungContainer: React.VFC = () => {
   };
   //  ấn nút ok
   const onExecutionConfirm = async (id: any) => {
-    console.log("id", id);
     setConfirmOpen(!confirmOpen);
-    await fetch(`http://${domain}/api/listjobs/${id}`, {
-      method: "DELETE",
-    });
-
-    await fetch(`http://${domain}/api/listjobs/active/1`)
-      .then(async (res) => await res.json())
-      .then((data) => setListTd(data));
   };
 
   const handlerEditCancel = () => {
