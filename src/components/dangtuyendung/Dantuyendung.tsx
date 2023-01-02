@@ -37,7 +37,6 @@ const Dangtuyendung: React.FC<Ilisttd> = ({
     e.stopPropagation();
   };
 
-  console.log("data", listTd);
   return (
     <div>
       <div className=" px-4">
