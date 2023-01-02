@@ -30,8 +30,7 @@ const Sidebar: React.VFC = () => {
           </div>
           <div className="ml-4 text-base text-white ">
             <a href="" className="font-normal">
-              {/* {nameAdmin} okok */}
-              okok
+              Công ty vận tải
             </a>
           </div>
         </div>

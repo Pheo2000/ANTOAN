@@ -11,26 +11,24 @@ const DangtuyedungContainer: React.VFC = () => {
 
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmEdit, setConfirmEdit] = useState<boolean>(false);
+  const [addConfirm, setAddconfirm] = useState<boolean>(false);
 
   const handlerTuyenDung = async () => {
     let abc = idLogin?.id ?? 1;
     const url = `http://${domain}/api/listjobs/active/${abc}`;
-    console.log("url", url);
     await fetch(url)
       .then(async (res) => await res.json())
       .then((data) => setListTd(data));
   };
 
   const handlerXoa = async (id: any) => {
-    console.log("okok", id);
-    setConfirmOpen(!confirmOpen);
-    // await fetch(`http://${domain}/api/listjobs/${id}`, {
-    //   method: "DELETE",
-    // });
+    await fetch(`http://${domain}/api/listjobs/${id}`, {
+      method: "DELETE",
+    });
 
-    // await fetch(`http://${domain}/api/listjobs/active/1`)
-    //   .then(async (res) => await res.json())
-    //   .then((data) => setListTd(data));
+    await fetch(`http://${domain}/api/listjobs/active/1`)
+      .then(async (res) => await res.json())
+      .then((data) => setListTd(data));
   };
 
   const onCloseConfirm = () => {
@@ -76,7 +74,7 @@ const DangtuyedungContainer: React.VFC = () => {
     const dataFormInput = {
       name: namei,
       quantity: slti,
-      sex: itemEdit.sex,
+      sex: true,
       age: agei,
       experence: exi,
       workAddress: adi,
@@ -91,6 +89,7 @@ const DangtuyedungContainer: React.VFC = () => {
     await fetch(`http://${domain}/api/listjobs/active/1`)
       .then(async (res) => await res.json())
       .then((data) => setListTd(data));
+
     setConfirmEdit(!confirmEdit);
   };
   useEffect(() => {
@@ -98,6 +97,55 @@ const DangtuyedungContainer: React.VFC = () => {
     idLogin = JSON.parse(localStorage.getItem("store") as any);
   }, []);
 
+  const handlerAdd = () => {
+    setAddconfirm(!addConfirm);
+  };
+
+  const handlerAddCancel = () => {
+    setAddconfirm(false);
+  };
+
+  const handlerAddOK = async () => {
+    setAddconfirm(!addConfirm);
+    const nameadd = (document.querySelector(".nameadd") as HTMLInputElement)
+      .value;
+    const sltadd = (document.querySelector(".stladd") as HTMLInputElement)
+      .value;
+    const ageadd = (document.querySelector(".ageadd") as HTMLInputElement)
+      .value;
+    const exadd = (document.querySelector(".exadd") as HTMLInputElement).value;
+    const adradd = (document.querySelector(".adradd") as HTMLInputElement)
+      .value;
+    const htdadd = (document.querySelector(".htdadd") as HTMLInputElement)
+      .value;
+    const luongadd = (document.querySelector(".luongadd") as HTMLInputElement)
+      .value;
+    const formAdd = {
+      company: {
+        id: 1,
+      },
+      name: nameadd,
+      salary: luongadd,
+      quantity: sltadd,
+      sex: true,
+      age: ageadd,
+      experence: exadd,
+      workAddress: adradd,
+      dateExpiration: htdadd,
+    };
+
+    await fetch(`http://${domain}/api/listjobs/save`, {
+      method: "POST",
+      body: JSON.stringify(formAdd),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    let abc = idLogin?.id ?? 1;
+    const url = `http://${domain}/api/listjobs/active/${abc}`;
+    await fetch(url)
+      .then(async (res) => await res.json())
+      .then((data) => setListTd(data));
+  };
   return (
     <div>
       <Dangtuyendung
@@ -111,6 +159,10 @@ const DangtuyedungContainer: React.VFC = () => {
         confirmOpen={confirmOpen}
         confirmEdit={confirmEdit}
         itemEdit={itemEdit}
+        addConfirm={addConfirm}
+        handlerAdd={handlerAdd}
+        handlerAddCancel={handlerAddCancel}
+        handlerAddOK={handlerAddOK}
       />
     </div>
   );
