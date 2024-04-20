@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { domain } from "../dangtuyendung/DangtuyendungContainer";
+import { domain } from "../User/user";
 
 const Login: React.FC = () => {
   const router = useRouter();

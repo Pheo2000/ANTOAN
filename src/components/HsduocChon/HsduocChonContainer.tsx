@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { domain } from "../dangtuyendung/DangtuyendungContainer";
+import { domain } from "../User/user";
 import HsduocChon from "./HsduocChon";
 const HsduocChonContainer: React.FC = () => {
   const [hsdc, setHdc] = useState<any[]>([]);

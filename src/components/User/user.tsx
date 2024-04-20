@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ConfirmDialog from "../helper/confirmDialog";
 
 export interface Ilisttd {
-  listTd: any[];
+  listuser: any[];
   confirmOpen: boolean;
   itemEdit: any;
   confirmEdit: boolean;
@@ -17,8 +17,8 @@ export interface Ilisttd {
   handlerAddCancel: () => void;
   handlerAddOK: () => void;
 }
-const Dangtuyendung: React.FC<Ilisttd> = ({
-  listTd,
+const UserPage: React.FC<Ilisttd> = ({
+  listuser,
   confirmEdit,
   itemEdit,
   confirmOpen,
@@ -37,11 +37,12 @@ const Dangtuyendung: React.FC<Ilisttd> = ({
     e.stopPropagation();
   };
 
+  console.log("sdfsdf", itemEdit)
   return (
     <div>
       <div className=" px-4">
         <div className="flex">
-          <h1 className="text-2xl font-medium mr-2">Quản lý tuyển dụng</h1>
+          <h1 className="text-2xl font-medium mr-2">Add User</h1>
           <i
             onClick={handlerAdd}
             className=" cursor-pointer fa-solid fa-plus text-2xl bg-green-500 rounded p-1"
@@ -50,42 +51,30 @@ const Dangtuyendung: React.FC<Ilisttd> = ({
 
         <section className="w-full py-6">
           <table className="border-collapse border w-full">
+            <thead>
             <tr className="text-left">
               <th className="p-2">ID</th>
-              <th className="p-2">Tên Công việc </th>
-              <th className="p-2">Lương</th>
-              <th className="p-2">Số lượng tuyển </th>
-              <th className="p-2">Giới tính </th>
-              <th className="p-2">Tuổi </th>
-              <th className="p-2">Kinh nghiệm </th>
-              <th className="p-2">Địa chỉ </th>
-              <th className="p-2">Ngày đăng tuyển</th>
-              <th className="p-2">Hạn tuyển dụng</th>
+              <th className="p-2">FullName </th>
+              <th className="p-2">Email</th>
+              <th className="p-2">Giới Tính </th>
+              <th className="p-2">Phone</th>
+              <th className="p-2">Địa Chỉ </th>
               <th className="p-2"></th>
             </tr>
+            </thead>
 
             <tbody>
-              {listTd.map((info, index) => {
+              {listuser.map((info, index) => {
                 return (
                   <tr key={index}>
                     <td className="p-2">{info.id}</td>
-                    <td className="p-2">{info.name} </td>
-                    <td className="p-2">{info.salary} </td>
-                    <td className="p-2">{info.quantity}</td>
+                    <td className="p-2">{info.fullName} </td>
+                    <td className="p-2">{info.email} </td>
                     <td className="p-2">
-                      {info.sex
-                        ? "Nam"
-                        : info.sex === null
-                        ? "Không yêu cầu"
-                        : !info.sex
-                        ? "Nữ"
-                        : "Không yêu cầu"}
+                     {info.gioitinh ? "Nam" : "Nữ"}
                     </td>
-                    <td className="p-2">{info.age}</td>
-                    <td className="p-2">{info.experence}</td>
-                    <td className="p-2">{info.workAddress}</td>
-                    <td className="p-2">{info.dateCreated}</td>
-                    <td className="p-2">{info.dateExpiration}</td>
+                    <td className="p-2">{info.sdt}</td>
+                    <td className="p-2">{info.address}</td>
                     <td className="p-2">
                       <button className="flex">
                         <i
@@ -118,36 +107,38 @@ const Dangtuyendung: React.FC<Ilisttd> = ({
         {confirmEdit && (
           <div
             onClick={() => handlerEditCancel}
-            className=" fixed inset-0 flex justify-center items-center bg-opacity-50 bg-mainText z-50"
+            className=" fixed inset-0 flex justify-center items-center bg-opacity-50 bg-black z-50"
           >
             <div
               onClick={(e) => onClickDialog(e)}
-              className="shadow-lg p-8 bg-gray-200 max-w-7xl mx-auto"
+              className="shadow-lg p-8 bg-gray-200 max-w-7xl mx-auto rounded"
             >
-              <div className=" grid grid-cols-4 ">
+              <div className=" grid grid-cols-3 ">
                 <div className="p-2">
                   <label className="block mb-2.5" htmlFor="id">
                     ID:{itemEdit.id}
                   </label>
 
                   <label className="block mb-2.5 mt-2" htmlFor="sdt">
-                    Họ tên
+                    FullName
                   </label>
                   <input
                     className="p-1 rounded input-getname"
                     type="text"
-                    defaultValue={itemEdit.name}
+                    defaultValue={itemEdit.fullName}
+                    placeholder="fullname"
                   />
                 </div>
 
                 <div className="p-2">
                   <label className="block mb-2.5" htmlFor="id">
-                    Số lượng tuyển
+                    Email
                   </label>
                   <input
-                    className="p-1 rounded input-getslt "
+                    className="p-1 rounded input-email "
                     type="text"
-                    defaultValue={itemEdit.quantity}
+                    defaultValue={itemEdit.email}
+                    placeholder="Email"
                   />
 
                   <label className="block mb-2.5 mt-2" htmlFor="email">
@@ -156,61 +147,43 @@ const Dangtuyendung: React.FC<Ilisttd> = ({
                   <select>
                     <option id="1">Nam</option>
                     <option id="0">Nữ</option>
-                    <option id="kyc">null</option>
                   </select>
                 </div>
 
                 <div className="p-2">
                   <label className="block mb-2.5" htmlFor="home">
-                    Tuổi
+                    Phone
                   </label>
                   <input
-                    className="p-1 rounded input-getage"
+                    className="p-1 rounded input-getPhone"
                     type="text"
-                    defaultValue={itemEdit.age}
+                    defaultValue={itemEdit.sdt}
+                    placeholder="Phone"
                   />
 
                   <label className="block mb-2.5 mt-2" htmlFor="Nationality">
-                    Kinh Nghiệm
+                    Adress
                   </label>
                   <input
-                    className="p-1 rounded input-getex"
+                    className="p-1 rounded input-adr"
                     type="text"
-                    defaultValue={itemEdit.experence}
+                    defaultValue={itemEdit.address}
+                    placeholder="Adress"
                   />
                 </div>
 
-                <div className="p-2">
-                  <label className="block mb-2.5" htmlFor="Apartment">
-                    Địa chỉ
-                  </label>
-                  <input
-                    className="p-1 rounded input-getad"
-                    type="text"
-                    defaultValue={itemEdit.workAddress}
-                  />
-
-                  <label className="block mb-2.5 mt-2" htmlFor="Adress">
-                    Hạn tuyển dụng
-                  </label>
-                  <input
-                    type="date"
-                    className="p-1 rounded input-gethtd"
-                    defaultValue={itemEdit.dateExpiration}
-                  />
-                </div>
               </div>
 
               <div className="rounded flex justify-center ">
                 <button
                   onClick={handlerEditCancel}
-                  className="w-40 h-12 border border-normal rounded shadow-md mr-4 hover:border-active hover:shadow-sm text-lg bg-red-100"
+                  className="w-40 h-12 border border-normal rounded shadow-md mr-4 hover:border-active hover:shadow-sm text-white text-lg bg-black"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => handlerEditOK(itemEdit.id)}
-                  className="w-40 h-12 border border-normal rounded shadow-md mr-4 hover:border-active hover:shadow-sm text-lg bg-green-200"
+                  className="w-40 h-12 border border-normal rounded shadow-md mr-4 hover:border-active hover:shadow-sm text-lg bg-blue-200"
                 >
                   OK
                 </button>
@@ -221,28 +194,28 @@ const Dangtuyendung: React.FC<Ilisttd> = ({
         {addConfirm && (
           <div
             onClick={() => handlerEditCancel}
-            className=" fixed inset-0 flex justify-center items-center bg-opacity-50 bg-mainText z-50"
+            className=" fixed inset-0 flex justify-center items-center bg-opacity-50 bg-black z-50"
           >
             <div
               onClick={(e) => onClickDialog(e)}
-              className="shadow-lg p-8 bg-gray-200 max-w-7xl mx-auto"
+              className="shadow-lg p-8 bg-gray-200 max-w-7xl mx-auto rounded"
             >
-              <div className=" grid grid-cols-4 ">
+              <div className=" grid grid-cols-3">
                 <div>
                   <label className="block mb-2.5 mt-2" htmlFor="sdt">
-                    Họ tên
+                    FullName  
                   </label>
                   <input className="p-1 rounded nameadd" type="text" />
 
                   <label className="block mb-2.5 mt-2" htmlFor="sdt">
-                    Lương
+                    Email
                   </label>
                   <input className="p-1 rounded luongadd" type="text" />
                 </div>
 
                 <div className="p-2">
                   <label className="block mb-2.5" htmlFor="id">
-                    Số lượng tuyển
+                    Phone
                   </label>
                   <input className="p-1 rounded stladd " type="text" />
 
@@ -252,7 +225,7 @@ const Dangtuyendung: React.FC<Ilisttd> = ({
                   <select>
                     <option id="1">Nam</option>
                     <option id="0">Nữ</option>
-                    <option id="kyc">null</option>
+                    {/* <option id="kyc">null</option> */}
                   </select>
                 </div>
 
@@ -263,21 +236,9 @@ const Dangtuyendung: React.FC<Ilisttd> = ({
                   <input className="p-1 rounded ageadd" type="text" />
 
                   <label className="block mb-2.5 mt-2" htmlFor="Nationality">
-                    Kinh Nghiệm
+                    Adress
                   </label>
                   <input className="p-1 rounded exadd" type="text" />
-                </div>
-
-                <div className="p-2">
-                  <label className="block mb-2.5" htmlFor="Apartment">
-                    Địa chỉ
-                  </label>
-                  <input className="p-1 rounded adradd" type="text" />
-
-                  <label className="block mb-2.5 mt-2" htmlFor="Adress">
-                    Hạn tuyển dụng
-                  </label>
-                  <input type="date" className="p-1 rounded htdadd" />
                 </div>
               </div>
 
@@ -303,4 +264,4 @@ const Dangtuyendung: React.FC<Ilisttd> = ({
   );
 };
 
-export default Dangtuyendung;
+export default UserPage;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { domain } from "../dangtuyendung/DangtuyendungContainer";
+import { domain } from "../User/user";
 import Hspv from "./Hspv";
 
 const HspvContainer: React.FC = () => {

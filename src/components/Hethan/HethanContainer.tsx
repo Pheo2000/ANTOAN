@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { domain } from "../dangtuyendung/DangtuyendungContainer";
+import { domain } from "../User/user";
 import Hethan from "./Hethan";
 
 const HethanContainer: React.FC = () => {
