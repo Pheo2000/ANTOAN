@@ -13,7 +13,7 @@ const Sidebar: React.VFC = () => {
       >
         <Image src="/AdminLTELogo.png" width={33} height={33} alt="logo" />
         <span className="block ml-4 mt-1 text-xl text-white ">
-          Trang Tuyển Dụng{" "}
+          Web Quản Trị{" "}
         </span>
       </div>
 
@@ -25,12 +25,12 @@ const Sidebar: React.VFC = () => {
               width={33}
               height={33}
               alt="logo"
-              className="rounded-full"
+              className="rounded"
             />
           </div>
           <div className="ml-4 text-base text-white ">
             <a href="" className="font-normal">
-              Công ty vận tải
+              Ứng Dụng Decor
             </a>
           </div>
         </div>
@@ -39,7 +39,7 @@ const Sidebar: React.VFC = () => {
           <ul className="mt-2 ">
             <li className=" px-3 py-2 relative ">
               <div className="flex block">
-                <p className="text-white ml-3 text-xl">Quản lý tuyển dụng </p>
+                <p className="text-white ml-3 text-xl">Quản lý các chức năng </p>
               </div>
               <div>
                 <ul className="mt-2 ml-4 cursor-pointer">
@@ -47,26 +47,26 @@ const Sidebar: React.VFC = () => {
                     onClick={() => router.push("/dang_tuyen_dung")}
                     className="flex mt-2 "
                   >
-                    <p className="text-white ml-3">Đang tuyển dụng </p>
+                    <p className="text-white ml-3"> Quản lý User </p>
                   </li>
                   <li
                     onClick={() => router.push("/da_xong")}
                     className="flex mt-2 "
                   >
-                    <p className="text-white ml-3">Đã xong </p>
+                    <p className="text-white ml-3"> Quản lý hóa đơn </p>
                   </li>
                   <li
                     onClick={() => router.push("/het_han")}
                     className="flex mt-2 "
                   >
-                    <p className="text-white ml-3">Hết hạn </p>
+                    <p className="text-white ml-3">Quản lý Thể loại</p>
                   </li>
                 </ul>
               </div>
             </li>
           </ul>
 
-          <ul className="mt-2 ">
+          {/* <ul className="mt-2 ">
             <li className=" px-3 py-2 relative ">
               <div className="flex block">
                 <p className="text-white ml-3 text-xl">Quản lý ứng viên </p>
@@ -100,7 +100,7 @@ const Sidebar: React.VFC = () => {
                 </ul>
               </div>
             </li>
-          </ul>
+          </ul> */}
         </nav>
       </div>
     </section>
