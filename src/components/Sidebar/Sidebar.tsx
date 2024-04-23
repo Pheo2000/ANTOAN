@@ -44,7 +44,7 @@ const Sidebar: React.VFC = () => {
               <div>
                 <ul className="mt-2 ml-4 cursor-pointer">
                   <li
-                    onClick={() => router.push("/dang_tuyen_dung")}
+                    onClick={() => router.push("/user")}
                     className="flex mt-2 "
                   >
                     <p className="text-white ml-3"> Quản lý User </p>

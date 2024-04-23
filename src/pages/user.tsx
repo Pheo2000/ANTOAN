@@ -1,12 +1,12 @@
 import { NextPage } from "next";
 import React from "react";
 import Layout from "@/components/helper/Layout";
-import Dangtuyendung from "@/components/User";
+import User from "@/components/User";
 
 const NewScreenPages: NextPage = () => {
   return (
     <Layout>
-      <Dangtuyendung />
+      <User />
     </Layout>
   );
 };
