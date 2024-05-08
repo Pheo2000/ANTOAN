@@ -7,9 +7,9 @@ const NotFound: React.VFC = () => {
         <p className={"text-2xl font-medium"}>404 Not Found</p>
 
         <p className={"mt-5 font-medium"}>
-          お探しのページが見つかりません。
+        Trang bạn đang tìm không thể truy cập.
           <br />
-          一時的にアクセスできない状況にあるか、移転、もしくは削除された可能性があります。
+          Nó có thể tạm thời không thể truy cập được, bị di chuyển hoặc bị xóa.
         </p>
       </div>
     </section>

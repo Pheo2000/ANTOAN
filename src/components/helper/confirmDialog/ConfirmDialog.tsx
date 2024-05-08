@@ -20,7 +20,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
     <div
       data-testid="confirmDialog"
       className={
-        "fixed inset-0 flex justify-center items-center bg-opacity-50 bg-mainText z-50"
+        "fixed inset-0 flex justify-center items-center bg-opacity-50 bg-black z-50"
       }
       onClick={onClickCancel}
     >

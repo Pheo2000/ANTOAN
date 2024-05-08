@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { domain } from "../User/user";
 
 const Login: React.FC = () => {
+  const url = "http://localhost:8080/api/nguoi-dung/login"
   const router = useRouter();
   const handlerLogin = async () => {
     const useName = (document.querySelector(".user_name") as HTMLInputElement)
@@ -15,7 +15,8 @@ const Login: React.FC = () => {
       password: passWord,
     };
 
-    await fetch(`http://${domain}/api/company/login`, {
+
+    await fetch(url, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json" },
@@ -23,35 +24,34 @@ const Login: React.FC = () => {
       .then(async (res) => await res.json())
       .then((data) => {
         const formdata = {
-          id: data.id,
-          name: data.name,
+          token: data.result
         };
         localStorage.setItem("store", JSON.stringify(formdata));
-        router.push("/dang_tuyen_dung");
+        router.push("/user");
       });
   };
   return (
     <div className=" fixed inset-0 flex justify-center items-center bg-white bg-mainText z-50 ">
-      <div className="shadow-lg p-8 bg-gray-200  mx-auto rounded relative">
+      <div className="shadow-lg p-8 bg-green-200  rounded relative w-96">
         <div className="absolute right-2 top-2 p-3 cursor-pointer">
           <i className="fa-solid fa-xmark"></i>
         </div>
         <div className=" grid grid-cols-1 ">
           <div className="p-2">
             <label className="block mb-2.5" htmlFor="id">
-              Họ Tên
+              Email
             </label>
             <input
               type="text"
-              className="p-1 rounded user_name"
-              placeholder="Họ tên...."
+              className="p-1 rounded user_name w-full"
+              placeholder="userName"
             />
 
             <label className="block mb-2.5 mt-2" htmlFor="sdt">
-              Mật khẩu
+              Password
             </label>
             <input
-              className="p-1 rounded pass_word"
+              className="p-1 rounded pass_word w-full"
               type="password"
               placeholder="password..."
             />

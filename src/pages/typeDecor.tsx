@@ -1,12 +1,12 @@
 import { NextPage } from "next";
 import React from "react";
 import Layout from "@/components/helper/Layout";
-import HstuChoi from "@/components/HstuChoi";
+import TypeDecor from "@/components/TypeDecor";
 
 const NewScreenPages: NextPage = () => {
   return (
     <Layout>
-      <HstuChoi />
+      <TypeDecor />
     </Layout>
   );
 };

@@ -37,45 +37,44 @@ const UserPage: React.FC<Ilisttd> = ({
     e.stopPropagation();
   };
 
-  console.log("sdfsdf", itemEdit)
   return (
     <div>
       <div className=" px-4">
         <div className="flex">
-          <h1 className="text-2xl font-medium mr-2">Add User</h1>
-          <i
+          <h1 className="text-2xl font-medium mr-2">Quản Lý User</h1>
+          {/* <i
             onClick={handlerAdd}
             className=" cursor-pointer fa-solid fa-plus text-2xl bg-green-500 rounded p-1"
-          ></i>
+          ></i> */}
         </div>
 
         <section className="w-full py-6">
-          <table className="border-collapse border w-full">
+          <table className="border-collapse border border-black w-full">
             <thead>
-            <tr className="text-left">
-              <th className="p-2">ID</th>
-              <th className="p-2">FullName </th>
-              <th className="p-2">Email</th>
-              <th className="p-2">Giới Tính </th>
-              <th className="p-2">Phone</th>
-              <th className="p-2">Địa Chỉ </th>
-              <th className="p-2"></th>
-            </tr>
+              <tr className="text-left border-b border-black">
+                <th className="p-2 border-r border-black">ID</th>
+                <th className="p-2 border-r border-black">FullName </th>
+                <th className="p-2 border-r border-black">Email</th>
+                <th className="p-2 border-r border-black">Giới Tính </th>
+                <th className="p-2 border-r border-black">Phone</th>
+                <th className="p-2 border-r border-black">Địa Chỉ </th>
+                <th className="p-2 border-r border-black"></th>
+              </tr>
             </thead>
 
             <tbody>
               {listuser.map((info, index) => {
                 return (
-                  <tr key={index}>
-                    <td className="p-2">{info.id}</td>
-                    <td className="p-2">{info.fullName} </td>
-                    <td className="p-2">{info.email} </td>
-                    <td className="p-2">
-                     {info.gioitinh ? "Nam" : "Nữ"}
+                  <tr key={index} className=" border-b border-black">
+                    <td className="p-2 border-r border-black">{info.id}</td>
+                    <td className="p-2 border-r border-black">{info.fullName} </td>
+                    <td className="p-2 border-r border-black">{info.email} </td>
+                    <td className="p-2 border-r border-black">
+                      {info.gioiTinh === true ? "Nam" : "Nữ"}
                     </td>
-                    <td className="p-2">{info.sdt}</td>
-                    <td className="p-2">{info.address}</td>
-                    <td className="p-2">
+                    <td className="p-2 border-r border-black">{info.sdt}</td>
+                    <td className="p-2 border-r border-black">{info.address}</td>
+                    <td className="p-2 border-r border-black">
                       <button className="flex">
                         <i
                           onClick={() => handlerEdit(info.id)}
@@ -135,7 +134,8 @@ const UserPage: React.FC<Ilisttd> = ({
                     Email
                   </label>
                   <input
-                    className="p-1 rounded input-email "
+                    disabled
+                    className="p-1 rounded input-email cursor-not-allowed"
                     type="text"
                     defaultValue={itemEdit.email}
                     placeholder="Email"
@@ -144,9 +144,10 @@ const UserPage: React.FC<Ilisttd> = ({
                   <label className="block mb-2.5 mt-2" htmlFor="email">
                     Giới tính
                   </label>
-                  <select>
-                    <option id="1">Nam</option>
-                    <option id="0">Nữ</option>
+                  {itemEdit != null}
+                  <select id="mySelect">
+                    <option id="0">{itemEdit.gioiTinh === true ? "Nam" : itemEdit.gioiTinh === false ? "Nữ" : ""}</option>
+                    <option id="0">{itemEdit.gioiTinh === true ? "Nữ" : itemEdit.gioiTinh === false ? "Nam" : ""}</option>
                   </select>
                 </div>
 
@@ -203,7 +204,7 @@ const UserPage: React.FC<Ilisttd> = ({
               <div className=" grid grid-cols-3">
                 <div>
                   <label className="block mb-2.5 mt-2" htmlFor="sdt">
-                    FullName  
+                    FullName
                   </label>
                   <input className="p-1 rounded nameadd" type="text" />
 
@@ -225,7 +226,6 @@ const UserPage: React.FC<Ilisttd> = ({
                   <select>
                     <option id="1">Nam</option>
                     <option id="0">Nữ</option>
-                    {/* <option id="kyc">null</option> */}
                   </select>
                 </div>
 

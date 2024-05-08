@@ -29,79 +29,34 @@ const Sidebar: React.VFC = () => {
             />
           </div>
           <div className="ml-4 text-base text-white ">
-            <a href="" className="font-normal">
+            <a href="/user" className="font-normal">
               Ứng Dụng Decor
             </a>
           </div>
         </div>
 
-        <nav className="mt-3 pb-10">
-          <ul className="mt-2 ">
-            <li className=" px-3 py-2 relative ">
-              <div className="flex block">
-                <p className="text-white ml-3 text-xl">Quản lý các chức năng </p>
-              </div>
-              <div>
-                <ul className="mt-2 ml-4 cursor-pointer">
-                  <li
-                    onClick={() => router.push("/user")}
-                    className="flex mt-2 "
-                  >
-                    <p className="text-white ml-3"> Quản lý User </p>
-                  </li>
-                  <li
-                    onClick={() => router.push("/da_xong")}
-                    className="flex mt-2 "
-                  >
-                    <p className="text-white ml-3"> Quản lý hóa đơn </p>
-                  </li>
-                  <li
-                    onClick={() => router.push("/het_han")}
-                    className="flex mt-2 "
-                  >
-                    <p className="text-white ml-3">Quản lý Thể loại</p>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
+        <p className="text-white ml-3 text-xl text-center">Các Action</p>
+      </div>
+      <div className="h-52 text-left mt-5 cursor-pointer">
+        <p
+          onClick={() => router.push("/user")}
+          className="text-white px-2 py-5 hover:bg-white hover:text-black"> Quản lý User </p>
+        <p
+          onClick={() => router.push("/typeDecor")}
+          className="text-white px-2 py-5 hover:bg-white hover:text-black"> Quản lý Thể Loại</p>
+        <p
+          onClick={() => router.push("/bill")}
+          className="text-white px-2 py-5 hover:bg-white hover:text-black">Quản lý Hóa Đơn
+        </p>
 
-          {/* <ul className="mt-2 ">
-            <li className=" px-3 py-2 relative ">
-              <div className="flex block">
-                <p className="text-white ml-3 text-xl">Quản lý ứng viên </p>
-              </div>
-              <div>
-                <ul className="mt-2 ml-4 cursor-pointer">
-                  <li
-                    onClick={() => router.push("/hsut")}
-                    className="flex mt-2 "
-                  >
-                    <p className="text-white ml-3">Hồ sơ ứng tuyển</p>
-                  </li>
-                  <li
-                    onClick={() => router.push("/hsycpv")}
-                    className="flex mt-2 "
-                  >
-                    <p className="text-white ml-3">Hồ sơ yêu cầu phỏng vấn </p>
-                  </li>
-                  <li
-                    onClick={() => router.push("/hsdc")}
-                    className="flex mt-2 "
-                  >
-                    <p className="text-white ml-3">Hồ sơ đã được chọn </p>
-                  </li>
-                  <li
-                    onClick={() => router.push("/hstc")}
-                    className="flex mt-2 "
-                  >
-                    <p className="text-white ml-3">Hồ sơ bị từ chối </p>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul> */}
-        </nav>
+        <p
+          onClick={() => router.push("/product")}
+          className="text-white px-2 py-5 hover:bg-white hover:text-black">Quản lý Sản Phẩm
+        </p>
+        <p className="text-center text-white">
+          <button className="p-3 bg-green-500 rounded">Logout</button>
+        </p>
+
       </div>
     </section>
   );

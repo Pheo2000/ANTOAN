@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import UserPage from "./user";
 
 const userContainer: React.VFC = () => {
-  const [listuser, setListUser] = useState<any[]>([]);
+  const host = "http://144.126.136.135:8085"
+  const tokenString = localStorage.getItem("store")
+  const token = JSON.parse(tokenString as string).token;
 
+  const [listuser, setListUser] = useState<any[]>([]);
   const [itemEdit, setItemEdit] = useState<any>({});
 
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
@@ -11,10 +14,18 @@ const userContainer: React.VFC = () => {
   const [addConfirm, setAddconfirm] = useState<boolean>(false);
 
   const handlerGetListUser = async () => {
-    const url = `http://localhost:8080/api/nguoi-dung/get/page`;
-    await fetch(url)
-      .then(async (res) => await res.json())
-      .then(data=> setListUser(data.content))
+    const url = `${host}/api/nguoi-dung/get/page?sort=id`;
+    await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(async data => await data.json())
+      .then(data =>{
+        setListUser(data.content)
+      })
   };
 
   const handlerXoa = async (id: any) => {
@@ -34,42 +45,62 @@ const userContainer: React.VFC = () => {
 
   const handlerEditCancel = () => {
     setConfirmEdit(!confirmEdit);
+    setItemEdit({})
+
   };
 
   const handlerEdit = async (id: any) => {
     setConfirmEdit(!confirmEdit);
-    await fetch(`http://localhost:8080/api/nguoi-dung/get/${id}`)
+    await fetch(`${host}/api/nguoi-dung/get/${id}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
       .then(async (res) => await res.json())
-      .then((data) => setItemEdit(data.result));
+      .then((data) => setItemEdit(data.data[0]));
+    // .then((data) => console.log("data", data.data));
   };
 
+
   const handlerEditOK = async (id: number) => {
-    const fullname = (document.querySelector(".input-getname") as HTMLInputElement)
-      .value;
-    const email = (document.querySelector(".input-email") as HTMLInputElement)
+    const fullName = (document.querySelector(".input-getname") as HTMLInputElement)
       .value;
     const phone = (document.querySelector(".input-getPhone") as HTMLInputElement)
       .value;
-    const adress = (document.querySelector(".input-adr") as HTMLInputElement)
+    const address = (document.querySelector(".input-adr") as HTMLInputElement)
       .value;
-    // const dataFormInput = {
-    //   name: namei,
-    //   quantity: slti,
-    //   sex: true,
-    //   age: agei,
-    //   experence: exi,
-    //   workAddress: adi,
-    //   dateExpiration: htdi,
-    // };
-    // await fetch(`http://${domain}/api/listjobs/update/${id}`, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(dataFormInput),
-    // }).then(async (res) => await res.json());
 
-    // await fetch(`http://${domain}/api/listjobs/active/1`)
-    //   .then(async (res) => await res.json())
+    const gioiTinh = (document.getElementById("mySelect") as HTMLInputElement).value
 
+    const dataFormInput = {
+      fullName: fullName,
+      gioiTinh: gioiTinh === "Nam"? true : gioiTinh === "Nữ" ? false : "",
+      address: address,
+      sdt: phone
+    };
+
+    console.log("data", dataFormInput)
+    await fetch(`${host}/api/nguoi-dung/put/${id}`, {
+      method: "PUT",
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataFormInput),
+    })
+
+
+    await fetch(`${host}/api/nguoi-dung/get/page?sort=id`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(async data => await data.json())
+      .then(data => setListUser(data.content))
     setConfirmEdit(!confirmEdit);
   };
   useEffect(() => {
