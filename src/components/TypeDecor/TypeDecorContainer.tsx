@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import TypeDecor from "./TypeDecor";
+import {uploadFile} from '../../utils/index'
 
 
 const TypeDecorContainer: React.FC = () => {
-  const host = "http://144.126.136.135:8085"
+  const host = "http://localhost:8080"
   const tokenString = localStorage.getItem("store")
   const token = JSON.parse(tokenString as string).token;
 
@@ -13,7 +14,6 @@ const TypeDecorContainer: React.FC = () => {
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false);
   const [confirmEdit, setConfirmEdit] = useState<boolean>(false);
   const [addConfirm, setAddconfirm] = useState<boolean>(false);
-  const [file, setFile] = useState("")
   const handlerGetTypeDecor = async () => {
     const url = `${host}/api/decor-type/get/page?sort=id`;
     await fetch(url, {
@@ -58,6 +58,7 @@ const TypeDecorContainer: React.FC = () => {
     // });
 
   };
+  
   const handlerAdd = () => {
     setAddconfirm(!addConfirm);
   };
@@ -70,9 +71,11 @@ const TypeDecorContainer: React.FC = () => {
     const NameType = (document.querySelector(".input-getname") as HTMLInputElement)
       .value;
     const dataFormInput = {
+      ...itemEdit,
       name: NameType,
       status: 1
     };
+
 
     await fetch(`${host}/api/decor-type/put/${id}`, {
       method: "PUT",
@@ -101,9 +104,9 @@ const TypeDecorContainer: React.FC = () => {
     const NameType = (document.querySelector(".input-getname") as HTMLInputElement)
       .value;
     const dataFormInput = {
+      ...itemEdit,
       name: NameType,
       status: 1,
-      iamge: file
     };
 
     await fetch(`${host}/api/decor-type/post`, {
@@ -127,6 +130,7 @@ const TypeDecorContainer: React.FC = () => {
       .then(data => setTypeDecor(data.content))
 
     setAddconfirm(!addConfirm);
+    setItemEdit({})
   };
 
 
@@ -152,13 +156,23 @@ const TypeDecorContainer: React.FC = () => {
       .then(data => setTypeDecor(data.content))
   };
   
-  const changeImage = (event: any) => {
-    setFile(event.target.files[0].name)
+  const changeImage = async (event: any) => {
+     const file = event.target.files[0]
+     const res = await uploadFile(file)
+     console.log("res", res)
+    //  @ts-ignore
+     setItemEdit({...itemEdit, image: res.path})
   }
   useEffect(() => {
     handlerGetTypeDecor();
-    console.log("file", file)
+    console.log("typeDecor", itemEdit)
   }, []);
+
+
+  // @ts-ignore
+  const handleInput = (event) => {
+    setItemEdit({...itemEdit, [event.target.name]: [event.target.value]})
+  }
 
 
   return <TypeDecor
@@ -177,6 +191,8 @@ const TypeDecorContainer: React.FC = () => {
     handlerEdit={handlerEdit}
     handlerEditOK={handlerEditOK}
     changeImage={changeImage}
+    // @ts-ignore
+    handleInput={handleInput}
   />;
 };
 

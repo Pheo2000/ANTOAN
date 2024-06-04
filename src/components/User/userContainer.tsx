@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import UserPage from "./user";
 
 const userContainer: React.VFC = () => {
-  const host = "http://144.126.136.135:8085"
+  const host = "http://localhost:8080"
   const tokenString = localStorage.getItem("store")
   const token = JSON.parse(tokenString as string).token;
 
@@ -23,7 +23,7 @@ const userContainer: React.VFC = () => {
       }
     })
       .then(async data => await data.json())
-      .then(data =>{
+      .then(data => {
         setListUser(data.content)
       })
   };
@@ -76,12 +76,11 @@ const userContainer: React.VFC = () => {
 
     const dataFormInput = {
       fullName: fullName,
-      gioiTinh: gioiTinh === "Nam"? true : gioiTinh === "Nữ" ? false : "",
+      gioiTinh: gioiTinh === "Nam" ? true : gioiTinh === "Nữ" ? false : "",
       address: address,
       sdt: phone
     };
 
-    console.log("data", dataFormInput)
     await fetch(`${host}/api/nguoi-dung/put/${id}`, {
       method: "PUT",
       headers: {
@@ -102,6 +101,7 @@ const userContainer: React.VFC = () => {
       .then(async data => await data.json())
       .then(data => setListUser(data.content))
     setConfirmEdit(!confirmEdit);
+    setItemEdit({})
   };
   useEffect(() => {
     handlerGetListUser();
@@ -160,16 +160,16 @@ const userContainer: React.VFC = () => {
     <div>
       <UserPage
         listuser={listuser}
+        confirmOpen={confirmOpen}
+        confirmEdit={confirmEdit}
+        itemEdit={itemEdit}
+        addConfirm={addConfirm}
         handlerXoa={handlerXoa}
         onCloseConfirm={onCloseConfirm}
         onExecutionConfirm={onExecutionConfirm}
         handlerEdit={handlerEdit}
         handlerEditCancel={handlerEditCancel}
         handlerEditOK={handlerEditOK}
-        confirmOpen={confirmOpen}
-        confirmEdit={confirmEdit}
-        itemEdit={itemEdit}
-        addConfirm={addConfirm}
         handlerAdd={handlerAdd}
         handlerAddCancel={handlerAddCancel}
         handlerAddOK={handlerAddOK}

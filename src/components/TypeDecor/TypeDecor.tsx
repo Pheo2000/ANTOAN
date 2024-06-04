@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import ConfirmDialog from "../helper/confirmDialog";
 
@@ -17,23 +17,31 @@ export interface ItypeDecor {
   handlerAdd: () => void;
   handlerAddCancel: () => void;
   handlerAddOK: () => void;
-  changeImage: (event: any)=> void
+  changeImage: (event: any) => void
+  handleInput: (event: any) => void
 }
 const TypeDecor: React.FC<ItypeDecor> = ({ typeDecor, confirmEdit,
   itemEdit,
   confirmOpen,
+  addConfirm,
   handlerXoa,
   onExecutionConfirm,
   onCloseConfirm,
   handlerEdit,
   handlerEditCancel,
   handlerEditOK,
-  addConfirm,
   handlerAdd,
   handlerAddCancel,
   changeImage,
-  handlerAddOK, }) => {
-  const urlImage = "http://144.126.136.135/BTL/file/"
+  handlerAddOK, handleInput }) => {
+  const refUpload = useRef(null)
+
+  const handleClickUpload = () => {
+    // @ts-ignore
+    refUpload.current?.click();
+  }
+
+  console.log("data",typeDecor)
   return (
     <div>
       <div className="px-4">
@@ -45,7 +53,13 @@ const TypeDecor: React.FC<ItypeDecor> = ({ typeDecor, confirmEdit,
                 <th className="p-2 border-r border-black">ID </th>
                 <th className="p-2 border-r border-black">Name Type</th>
                 <th className="p-2 border-r border-black">Hình Ảnh </th>
-                <th className="p-2 border-r border-black"> </th>
+                <th className="p-2 border-r border-black">
+                  <i
+                    onClick={() => handlerAdd()}
+                    className="fa-solid fa-plus text-green-500 mr-4"
+                  >
+                  </i>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -56,21 +70,17 @@ const TypeDecor: React.FC<ItypeDecor> = ({ typeDecor, confirmEdit,
                       <td className="p-2 border-r border-black">{item.id} </td>
                       <td className="p-2 border-r border-black">{item.name} </td>
                       <td className="p-2 border-r border-black">
-                        <Image
+                        <img
                           height="40"
                           width="40"
-                          src={`${urlImage}${item.image}`}
-                          className=" absolute rounded-full"
+                          src={item.image}
+                          className="rounded-full"
                           alt=""
                         />
                       </td>
                       <td className="p-2 border-r border-black">
                         <button className="">
-                          <i
-                            onClick={() => handlerAdd()}
-                            className="fa-solid fa-plus text-green-500 mr-4"
-                          >
-                          </i>
+
                           <i
                             onClick={() => handlerEdit(item.id)}
                             className="fa-solid fa-pen text-green-500 mr-6"
@@ -118,18 +128,23 @@ const TypeDecor: React.FC<ItypeDecor> = ({ typeDecor, confirmEdit,
                   <input
                     className="p-1 rounded input-getname"
                     type="text"
-                    defaultValue={itemEdit.name}
+                    name="name"
+                    value={itemEdit.name || ""}
                     placeholder="Name type..."
+                    onChange={(event) => handleInput(event)}
                   />
 
-                  <label className="block mb-2.5" htmlFor="id">
-                    Image
-                  </label>
+                  <img
+                    src={itemEdit.image}
+                    onClick={() => handleClickUpload()}
+                    width={40}
+                    height={40} style={{ objectFit: 'cover' }} />
                   <input
-                    className="p-1 rounded input-email cursor-not-allowed"
+                    className="p-1 rounded input-email cursor-not-allowed hidden"
                     type="file"
-                    defaultValue={itemEdit.image}
                     placeholder="Path Image"
+                    ref={refUpload}
+                    onChange={() => changeImage(event)}
                   />
                 </div>
 
@@ -179,15 +194,13 @@ const TypeDecor: React.FC<ItypeDecor> = ({ typeDecor, confirmEdit,
                     defaultValue={itemEdit.name}
                     placeholder="Name type..."
                   />
-
-                  <label className="block mb-2.5" htmlFor="id">
-                    Image
-                  </label>
+                  <img src={itemEdit.image} onClick={() => handleClickUpload()} width={40} height={40} style={{ objectFit: 'cover' }} />
                   <input
-                    className="p-1 rounded input-email cursor-not-allowed"
+                    className="p-1 rounded input-email cursor-not-allowed hidden"
                     type="file"
                     placeholder="Path Image"
-                    onChange={()=> changeImage(event)}
+                    ref={refUpload}
+                    onChange={() => changeImage(event)}
                   />
                 </div>
               </div>

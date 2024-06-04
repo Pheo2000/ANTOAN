@@ -14,7 +14,7 @@ const Login: React.FC = () => {
       username: useName,
       password: passWord,
     };
-
+    console.log("data", formData)
 
     await fetch(url, {
       method: "POST",
