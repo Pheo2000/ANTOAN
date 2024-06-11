@@ -52,7 +52,7 @@ const Product: React.FC<Iproduct> = ({
           <button className="ml-3 bg-blue-400 p-2  rounded " onClick={() => hanlderSeqarch(valueText)}> search</button>
         </div>
         <section className="w-full py-6 max-h-[600px] overflow-y-auto">
-          <table className="border-collapse border border-black overflow-y-auto w-full min-h-screen">
+          <table className="border-collapse border border-black overflow-y-auto w-full">
             <thead>
               <tr className="text-left  border-b border-black">
                 <th className="p-2 border-r border-black">ID</th>

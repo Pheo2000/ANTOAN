@@ -3,7 +3,6 @@ import Product from "./Product";
 import { uploadFile } from "@/utils";
 
 
-const PAGE_SIZE = 5;
 const ProductContainer: React.FC = () => {
 
   const host = "http://localhost:8080"
@@ -12,7 +11,6 @@ const ProductContainer: React.FC = () => {
   const token = JSON.parse(tokenString as string).token;
 
   const [ProductList, setProductList] = useState<any[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [confirmEdit, setConfirmEdit] = useState<boolean>(false);
   const [itemEdit, setItemEdit] = useState<any>({});
   const [addConfirm, setAddconfirm] = useState<boolean>(false);
@@ -30,7 +28,6 @@ const ProductContainer: React.FC = () => {
     })
       .then(async data => await data.json())
       .then(data => setProductList(data.content))
-    // .then(data => console.log("data", data))
   };
 
   const handlerEdit = async (id: any) => {
@@ -165,14 +162,18 @@ const ProductContainer: React.FC = () => {
       image: itemEdit.image,
       quantity: quantity,
       status: 1
+    } 
+
+    if (dataForm.name == "" &&
+      dataForm.descriptionDecor == "" &&
+      dataForm.price == "" &&
+      dataForm.quantity == "" &&
+      dataForm.idDecorType != 0
+    ){
+      return
     }
 
-    if (dataForm.name != "" &&
-      dataForm.descriptionDecor != "" &&
-      dataForm.price != "" &&
-      dataForm.quantity != "" &&
-      dataForm.ididDecorType != 0
-    ) {
+
       await fetch(`${host}/api/decor/post`, {
         method: "POST",
         headers: {
@@ -182,19 +183,17 @@ const ProductContainer: React.FC = () => {
         body: JSON.stringify(dataForm),
       })
 
-      await fetch(`${host}/api/decor/get/page?sort=id`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(async data => await data.json())
-        .then(data => setProductList(data.content))
-        setAddconfirm(!addConfirm);
-    }else{
-      console.log("dadasas")
-    }
+    await fetch(`${host}/api/decor/get/page?sort=id`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(async data => await data.json())
+      .then(data => setProductList(data.content))
+    setAddconfirm(!addConfirm);
+
   }
   useEffect(() => {
     handlerGetProduct();

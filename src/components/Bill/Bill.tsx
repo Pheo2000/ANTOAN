@@ -8,19 +8,20 @@ export interface Ibill {
   hanlderSeqarch: (valueText: string) => void;
 
 }
-const Bill: React.FC<Ibill> = ({ billList ,
+const Bill: React.FC<Ibill> = ({ billList,
   valueText,
   setValueText,
   hanlderSeqarch
 }) => {
+  console.log("billList", billList)
   return (
     <div>
       <div className=" px-4">
         <h1 className="text-2xl font-medium">Quản lý Hoá Đơn</h1>
-        <div className="mt-2 w-full p-1 border-black border flex rounded">
+        {/* <div className="mt-2 w-full p-1 border-black border flex rounded">
           <input type="text" defaultValue={valueText} onChange={(e) => setValueText(e.target.value)} className="w-full" placeholder="value text......" />
           <button className="ml-3 bg-blue-400 p-2  rounded " onClick={() => hanlderSeqarch(valueText)}> search</button>
-        </div>
+        </div> */}
         <section className="w-full py-6">
           <table className="border-collapse border w-full border border-black">
             <thead>
@@ -44,8 +45,18 @@ const Bill: React.FC<Ibill> = ({ billList ,
                     <td className="p-2 border-r border-black">{info.user.fullName}</td>
                     <td className="p-2 border-r border-black">{info.user.sdt}</td>
                     <td className="p-2 border-r border-black">{info.total}</td>
-                    <td className="p-2 border-r border-black">{info.user.address}</td>
-                    <td className="p-2 border-r border-black"></td>
+                    <td className="p-2 border-r border-black">{info.address ? info.address : info.user.address}</td>
+                    <td className="p-2 border-r border-black">
+                      <select id="mySelect" className="ml-2">
+                        {billList.map((item) => {
+                          return (
+                            <option key={item.id} value={item.id}>
+                              {item.status == 0 ? "Chờ lấy hàng" : item.status == 1 ? "Đang vận chuyển" : item.status == 2 ? "thành công" : ""}
+                            </option>
+                          )
+                        })}
+                      </select>
+                    </td>
                   </tr>
                 );
               })}

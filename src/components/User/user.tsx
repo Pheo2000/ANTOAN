@@ -48,7 +48,7 @@ const UserPage: React.FC<Ilisttd> = ({
           ></i> */}
         </div>
 
-        <section className="w-full py-6">
+        <section className="w-full py-6 max-h-[600px] overflow-y-auto">
           <table className="border-collapse border border-black w-full">
             <thead>
               <tr className="text-left border-b border-black">
@@ -58,7 +58,7 @@ const UserPage: React.FC<Ilisttd> = ({
                 <th className="p-2 border-r border-black">Giới Tính </th>
                 <th className="p-2 border-r border-black">Phone</th>
                 <th className="p-2 border-r border-black">Địa Chỉ </th>
-                <th className="p-2 border-r border-black"></th>
+                {/* <th className="p-2 border-r border-black"></th> */}
               </tr>
             </thead>
 
@@ -86,7 +86,7 @@ const UserPage: React.FC<Ilisttd> = ({
                         ></i>
                       </button>
                     </td>
-                    <td>
+                    {/* <td>
                       {confirmOpen && (
                         <ConfirmDialog
                           title="Dialog"
@@ -96,7 +96,7 @@ const UserPage: React.FC<Ilisttd> = ({
                           onClickOk={() => onExecutionConfirm(info.id)}
                         />
                       )}
-                    </td>
+                    </td> */}
                   </tr>
                 );
               })}

@@ -29,6 +29,26 @@ const userContainer: React.VFC = () => {
   };
 
   const handlerXoa = async (id: any) => {
+    await fetch(`${host}/api/nguoi-dung/del/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+
+
+    const url = `${host}/api/nguoi-dung/get/page?sort=id`;
+    await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(async data => await data.json())
+      .then(data => setListUser(data.content))
+
   };
 
   const onCloseConfirm = () => {

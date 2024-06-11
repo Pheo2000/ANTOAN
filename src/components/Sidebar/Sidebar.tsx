@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-const Sidebar: React.VFC = () => {
+interface IpropsLogout {
+  handlerLogOut : ()=> void
+}
+
+const Sidebar: React.VFC<IpropsLogout> = ({handlerLogOut}) => {
   const router = useRouter();
 
   return (
@@ -53,8 +57,8 @@ const Sidebar: React.VFC = () => {
           onClick={() => router.push("/product")}
           className="text-white px-2 py-5 hover:bg-white hover:text-black">Quản lý Sản Phẩm
         </p>
-        <p className="text-center text-white">
-          <button className="p-3 bg-green-500 rounded">Logout</button>
+        <p className="text-center text-white mt-4">
+          <button onClick={() => handlerLogOut()} className="p-3 px-5 bg-green-500 rounded">Logout</button>
         </p>
 
       </div>
