@@ -47,6 +47,15 @@ const Bill: React.FC<Ibill> = ({ billList,
                     <td className="p-2 border-r border-black">{info.total}</td>
                     <td className="p-2 border-r border-black">{info.address ? info.address : info.user.address}</td>
                     <td className="p-2 border-r border-black">
+                      {/* <select id="mySelect" className="ml-2">
+                        {billList.map((item) => {
+                          return (
+                            <option key={item.id} value={item.id}>
+                              {item.status == 0 ? "Chờ lấy hàng" : item.status == 1 ? "Đang vận chuyển" : item.status == 2 ? "thành công" : ""}
+                            </option>
+                          )
+                        })}
+                      </select> */}
                       <select id="mySelect" className="ml-2">
                         {billList.map((item) => {
                           return (
@@ -56,6 +65,7 @@ const Bill: React.FC<Ibill> = ({ billList,
                           )
                         })}
                       </select>
+
                     </td>
                   </tr>
                 );

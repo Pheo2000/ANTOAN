@@ -58,7 +58,13 @@ const UserPage: React.FC<Ilisttd> = ({
                 <th className="p-2 border-r border-black">Giới Tính </th>
                 <th className="p-2 border-r border-black">Phone</th>
                 <th className="p-2 border-r border-black">Địa Chỉ </th>
-                {/* <th className="p-2 border-r border-black"></th> */}
+                <th className="p-2 border-r border-black text-center">
+                  <i
+                    onClick={() => handlerAdd()}
+                    className="fa-solid fa-plus text-green-500 mr-4"
+                  >
+                  </i>
+                </th>
               </tr>
             </thead>
 
@@ -74,7 +80,7 @@ const UserPage: React.FC<Ilisttd> = ({
                     </td>
                     <td className="p-2 border-r border-black">{info.sdt}</td>
                     <td className="p-2 border-r border-black">{info.address}</td>
-                    <td className="p-2 border-r border-black">
+                    <td className="p-2 border-r border-black ">
                       <button className="flex">
                         <i
                           onClick={() => handlerEdit(info.id)}
@@ -211,34 +217,38 @@ const UserPage: React.FC<Ilisttd> = ({
                   <label className="block mb-2.5 mt-2" htmlFor="sdt">
                     Email
                   </label>
-                  <input className="p-1 rounded luongadd" type="text" />
+                  <input className="p-1 rounded email" type="text" />
                 </div>
 
                 <div className="p-2">
                   <label className="block mb-2.5" htmlFor="id">
                     Phone
                   </label>
-                  <input className="p-1 rounded stladd " type="text" />
+                  <input className="p-1 rounded phone " type="text" />
 
                   <label className="block mb-2.5 mt-2" htmlFor="email">
                     Giới tính
                   </label>
-                  <select>
-                    <option id="1">Nam</option>
-                    <option id="0">Nữ</option>
+                  <label className="block mb-2.5 mt-2" htmlFor="email">
+                    Giới tính
+                  </label>
+                  {itemEdit != null}
+                  <select id="mySelect">
+                    <option id="0" value={"Nam"}>Nam</option>
+                    <option id="0" value={"Nữ"}>Nu</option>
                   </select>
                 </div>
 
                 <div className="p-2">
                   <label className="block mb-2.5" htmlFor="home">
-                    Tuổi
+                    Password
                   </label>
-                  <input className="p-1 rounded ageadd" type="text" />
+                  <input className="p-1 rounded password" type="text" />
 
                   <label className="block mb-2.5 mt-2" htmlFor="Nationality">
                     Adress
                   </label>
-                  <input className="p-1 rounded exadd" type="text" />
+                  <input className="p-1 rounded adress" type="text" />
                 </div>
               </div>
 

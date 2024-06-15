@@ -139,42 +139,50 @@ const userContainer: React.VFC = () => {
     setAddconfirm(!addConfirm);
     const nameadd = (document.querySelector(".nameadd") as HTMLInputElement)
       .value;
-    const sltadd = (document.querySelector(".stladd") as HTMLInputElement)
+    const email = (document.querySelector(".email") as HTMLInputElement)
       .value;
-    const ageadd = (document.querySelector(".ageadd") as HTMLInputElement)
+    const phone = (document.querySelector(".phone") as HTMLInputElement)
       .value;
-    const exadd = (document.querySelector(".exadd") as HTMLInputElement).value;
-    const adradd = (document.querySelector(".adradd") as HTMLInputElement)
+    const adradd = (document.querySelector(".adress") as HTMLInputElement)
       .value;
-    const htdadd = (document.querySelector(".htdadd") as HTMLInputElement)
+
+    const password = (document.querySelector(".password") as HTMLInputElement)
       .value;
-    const luongadd = (document.querySelector(".luongadd") as HTMLInputElement)
-      .value;
+
+    const gioiTinh = (document.getElementById("mySelect") as HTMLInputElement).value
+
+
     const formAdd = {
-      company: {
-        id: 1,
-      },
-      name: nameadd,
-      salary: luongadd,
-      quantity: sltadd,
-      sex: true,
-      age: ageadd,
-      experence: exadd,
-      workAddress: adradd,
-      dateExpiration: htdadd,
+      email: email,
+      password: password,
+      fullName: nameadd,
+      gioiTinh: gioiTinh === "Nam" ? true : gioiTinh === "Nữ" ? false : "",
+      address: adradd,
+      sdt: phone,
+      status: 1,
+      avatar: '',
+      role:1
     };
 
-    // await fetch(`http://${domain}/api/listjobs/save`, {
-    //   method: "POST",
-    //   body: JSON.stringify(formAdd),
-    //   headers: { "Content-Type": "application/json" },
-    // });
+    await fetch(`${host}/api/nguoi-dung/create`, {
+      method: "POST",
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formAdd),
+    })
 
-    // let abc = idLogin?.id ?? 1;
-    // const url = `http://${domain}/api/listjobs/active/${abc}`;
-    // await fetch(url)
-    //   .then(async (res) => await res.json())
-    //   .then((data) => setListTd(data));
+    await fetch(`${host}/api/nguoi-dung/get/page?sort=id`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(async data => await data.json())
+      .then(data => setListUser(data.content))
+
   };
   return (
     <div>
