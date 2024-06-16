@@ -57,13 +57,9 @@ const Bill: React.FC<Ibill> = ({ billList,
                         })}
                       </select> */}
                       <select id="mySelect" className="ml-2">
-                        {billList.map((item) => {
-                          return (
-                            <option key={item.id} value={item.id}>
-                              {item.status == 0 ? "Chờ lấy hàng" : item.status == 1 ? "Đang vận chuyển" : item.status == 2 ? "thành công" : ""}
-                            </option>
-                          )
-                        })}
+                         <option >Đang lấy hàng </option>
+                         <option >Đang Vận Chuyển </option>
+                         <option >Thành Công </option>
                       </select>
 
                     </td>

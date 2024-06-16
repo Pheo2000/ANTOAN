@@ -229,13 +229,10 @@ const UserPage: React.FC<Ilisttd> = ({
                   <label className="block mb-2.5 mt-2" htmlFor="email">
                     Giới tính
                   </label>
-                  <label className="block mb-2.5 mt-2" htmlFor="email">
-                    Giới tính
-                  </label>
                   {itemEdit != null}
                   <select id="mySelect">
                     <option id="0" value={"Nam"}>Nam</option>
-                    <option id="0" value={"Nữ"}>Nu</option>
+                    <option id="0" value={"Nữ"}>Nữ</option>
                   </select>
                 </div>
 
@@ -243,7 +240,7 @@ const UserPage: React.FC<Ilisttd> = ({
                   <label className="block mb-2.5" htmlFor="home">
                     Password
                   </label>
-                  <input className="p-1 rounded password" type="text" />
+                  <input className="p-1 rounded password" type="password" />
 
                   <label className="block mb-2.5 mt-2" htmlFor="Nationality">
                     Adress
